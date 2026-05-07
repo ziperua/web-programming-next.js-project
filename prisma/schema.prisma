@@ -1,15 +1,14 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../app/generated/prisma"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")        
+  provider = "sqlite"      
 }
 
 model User{
-  id          Int      @id default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String   
   email       String   @unique
   password    String   
@@ -17,7 +16,7 @@ model User{
   cars        Car[]
 }
 model Car{
-  id          Int      @id default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
   description String
   brand       String
