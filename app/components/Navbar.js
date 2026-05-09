@@ -34,10 +34,9 @@ export default function Navbar(){
                 <Link href="/cars" className="hover:text-yellow-400">
                 Browse Cars
                 </Link>
-                //if user loged in:
                 {user ? (
                     <>
-                    <Link href="/cars/new className="hover:text-yellow-400>
+                    <Link href="/cars/new" className="hover:text-yellow-400">
                     Sell a Car
                     </Link>
                     <span className="text-gray-400">Hi {user.name}</span>
