@@ -3,19 +3,23 @@
 import Link from 'next/link'
 import {useRouter} from 'next/navigation' //as useNavigate in react
 import {useState, useEffect} from 'react'
+import {usePathname} from 'next/navigation'
 
 export default function Navbar(){
     const [user, setUser] = useState(null)
     const router = useRouter()
+    const pathname = usePathname() // to refresh the page after user login
+
     // checks if we have user
     useEffect(() => {
         fetch('api/auth/me')
             .then(res => res.json())
             .then(data => {
               if (data.user) setUser(data.user)
+              else setUser(null)
         })
-        .catch(() => {})
-    }, [])
+        .catch(() => setUser(null))
+    }, [pathname])
     //logout with pushing user to home page and refreshing to have the fresh page
     const handleLogout = async () => {
         await fetch('/api/auth/logout', {method: 'POST'})
@@ -39,7 +43,7 @@ export default function Navbar(){
                     <Link href="/cars/new" className="hover:text-yellow-400">
                     Sell a Car
                     </Link>
-                    <span className="text-gray-400">Hi {user.name}</span>
+                    <span className="text-yellow-400">Hi {user.name}</span>
                     <button
                         onClick={handleLogout}
                         className="bg-red-600 px-3 py-1 rounded hover:bg-red-700"
@@ -47,7 +51,7 @@ export default function Navbar(){
                             Logout
                         </button>
                     </>
-                    //if not:
+                    //if not loged in:
                 ) : (
                     <>
                     <Link href="/login" className="hover:text-yellow-400">

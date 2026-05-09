@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import bcrypt from 'brycptjs'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import prisma from '@/app/lib/prisma'
 
