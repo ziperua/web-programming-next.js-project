@@ -55,7 +55,7 @@ export async function POST(request){
         //saving token in cookie
         response.cookies.set('token', token, {
             httpOnly: true,
-            maxAge: 60 *60 * 24 * 7, //7 days in seconds
+            maxAge: 60 * 60 * 24 * 7, //7 days in seconds
         })
         
         return response
