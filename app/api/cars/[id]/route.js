@@ -4,7 +4,8 @@ import {jwtVerify} from 'jose'
 
 export async function GET(request, {params}){
     try{
-        const id = parseInt(params.id)
+        const { id: idString } = await params
+        const id = parseInt(idString)
         const car = await prisma.car.findUnique({where: {id}, include: {user: {select:{name:true}}}})
         if(!car){
             return NextResponse.json(
@@ -23,7 +24,8 @@ export async function GET(request, {params}){
 
 export async function PUT(request, {params}){
     try{
-        const id = parseInt(params.id)
+        const { id: idString } = await params
+        const id = parseInt(idString)
         const token = await request.cookies.get('token')?.value
 
         if(!token){
@@ -62,7 +64,8 @@ export async function PUT(request, {params}){
 
 export async function DELETE(request, {params}){
     try{
-        const id = parseInt(params.id)
+        const { id: idString } = await params
+        const id = parseInt(idString)
         const token = await request.cookies.get('token')?.value
 
         if(!token){

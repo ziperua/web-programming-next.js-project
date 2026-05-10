@@ -12,7 +12,7 @@ export default function Navbar(){
 
     // checks if we have user
     useEffect(() => {
-        fetch('api/auth/me')
+        fetch('/api/auth/me')
             .then(res => res.json())
             .then(data => {
               if (data.user) setUser(data.user)
